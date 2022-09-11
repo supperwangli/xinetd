@@ -1,6 +1,6 @@
 # Process this file with autoconf to create configure.
 
-AC_PREREQ([2.65])
+AC_PREREQ([2.69])
 
 # ====================
 # Version informations
@@ -16,7 +16,7 @@ m4_define([xinetd_version],[xinetd_version_major.xinetd_version_minor.xinetd_ver
 # =============
 AC_INIT([xinetd],[xinetd_version])
 AC_CONFIG_MACRO_DIR([m4])
-AM_INIT_AUTOMAKE([1.11 subdir-objects foreign dist-xz dist-bzip2])
+AM_INIT_AUTOMAKE([1.13 subdir-objects foreign dist-xz dist-bzip2])
 AM_SILENT_RULES([yes])
 AC_LANG([C])
 
