@@ -132,14 +132,17 @@ AS_IF([test x"$with_rpc" != "xno"], [
             [no], [break],
             [*], [PKG_CHECK_MODULES([RPC], ["$rpc_impl"], [], [continue])])
         have_rpc=maybe
-        AC_CHECK_HEADERS([rpc/rpc.h],, [have_rpc=no; break])
+        save_CPPFLAGS=$CPPFLAGS
+        CPPFLAGS="$CPPFLAGS $RPC_CFLAGS"
+        AC_CHECK_HEADERS([rpc/rpc.h],, [have_rpc=no])
         dnl FIXME do a linking test
         AS_IF([test x"$have_rpc" = xmaybe], [
             dnl XXX is this header really optional?
             AC_CHECK_HEADERS([rpc/rpcent.h])
             have_rpc=yes
-            break
         ])
+        CPPFLAGS=$save_CPPFLAGS
+        AS_IF([test x"$have_rpc" = xyes], [break])
         dnl cleanup variables for next test round
         AS_UNSET([ac_cv_header_rpc_rpc_h])
         AS_UNSET([ac_cv_header_rpc_rpcent_h])
