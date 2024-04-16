@@ -190,7 +190,7 @@ static int filelog_write( xlog_s *xp, const char buf[], int len, int flags,
 	if ( flp->fl_state != FL_OPEN )
 		return( flp->fl_error ) ;
 
-	(void) time( &current_time ) ;
+	(void) _time( &current_time ) ;
 	tmp = localtime( &current_time ) ;
 	cc = Sprint( flp->fl_fd, "%02d/%d/%d@%02d:%02d:%02d",
 		tmp->tm_year%100, tmp->tm_mon+1, tmp->tm_mday,

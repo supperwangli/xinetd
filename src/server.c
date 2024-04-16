@@ -228,7 +228,7 @@ status_e server_start( struct server *serp )
          return( FAILED ) ;
 
       default:
-         (void) time( &SERVER_STARTTIME(serp) ) ;
+         (void) _time( &SERVER_STARTTIME(serp) ) ;
          SVC_INC_RUNNING_SERVERS( sp ) ;
 
          /*

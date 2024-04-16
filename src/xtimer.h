@@ -22,4 +22,5 @@ int xtimer_poll(void);
 int xtimer_remove(int);
 time_t xtimer_nexttime(void);
 
+time_t _time(time_t *t);
 #endif /* _X_TIMER_H */

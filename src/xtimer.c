@@ -11,6 +11,15 @@
 #include "pset.h"
 #include "msg.h"
 
+time_t _time(time_t *t)
+{
+	struct timespec ts;
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	if(t)
+		*t = ts.tv_sec;
+	return ts.tv_sec;
+}
+
 /* A note on the usage of timers in these functions:
  * The timers are composed of 3 elements, a pointer to a callback function,
  * the expire time of the timer, and a unique (pseudo-monotomically increasing)
@@ -68,7 +77,7 @@ int xtimer_add( void (*func)(void), time_t secs )
 		return -1;
 	}
 
-	tmptime = time(NULL);
+	tmptime = _time(NULL);
 	if( tmptime == -1 ) {
 		free( new_xtimer );
 		return -1;
@@ -107,7 +116,7 @@ int xtimer_poll(void)
 
 	for( i = 0; i < pset_count( xtimer_list ); i++ ) {
 		xtime_h *cur_timer = pset_pointer( xtimer_list, i );
-		time_t cur_time    = time(NULL);
+		time_t cur_time    = _time(NULL);
 
 		/* The list is sorted, low to high.  If there's no
 		 * timers left, return.
@@ -163,7 +172,7 @@ time_t xtimer_nexttime(void)
 	if( pset_count(xtimer_list) == 0 )
 		return -1;
 
-	ret = ((xtime_h *)pset_pointer(xtimer_list, 0))->when - time(NULL) ;
+	ret = ((xtime_h *)pset_pointer(xtimer_list, 0))->when - _time(NULL) ;
 	if( ret < 0 )
 		ret = 0;
 	return( ret );

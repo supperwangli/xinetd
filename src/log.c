@@ -202,7 +202,7 @@ void svc_log_exit( struct service *sp, const struct server *serp )
    {
       time_t current_time ;
 
-      (void) time( &current_time ) ;
+      (void) _time( &current_time ) ;
       cc = strx_nprint( &buf[ len ], bufsize, " duration=%ld(sec)",
          (long)(current_time - SERVER_STARTTIME( serp )) ) ;
       len += cc ;

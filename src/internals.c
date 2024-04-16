@@ -85,7 +85,7 @@ void dump_internal_state(void)
     * Print the program name, version, and timestamp.
     * Note that the program_version variable contains the program name.
     */
-   (void) time( &current_time ) ;
+   (void) _time( &current_time ) ;
    Sprint( dump_fd, "INTERNAL STATE DUMP: %s\n", program_version ) ;
    Sprint( dump_fd, "Current time: %s\n", ctime( &current_time ) ) ;
 
