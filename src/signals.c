@@ -301,7 +301,7 @@ static void bad_signal(void)
    else if ( total_signal_count > MAX_SIGNAL_COUNT )
       _exit( 1 ) ;      /* in case of a problem in exit(3) */
    
-   (void) time( &current_time ) ;
+   (void) _time( &current_time ) ;
 
    if ( interval_signal_count > 0 &&
             current_time - interval_start <= SIGNAL_INTERVAL )

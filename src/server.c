@@ -30,6 +30,7 @@
 #include "retry.h"
 #include "child.h"
 #include "signals.h"
+#include "xtimer.h"
 
 
 #define NEW_SERVER()                NEW( struct server )
@@ -228,7 +229,7 @@ status_e server_start( struct server *serp )
          return( FAILED ) ;
 
       default:
-         (void) time( &SERVER_STARTTIME(serp) ) ;
+         (void) _time( &SERVER_STARTTIME(serp) ) ;
          SVC_INC_RUNNING_SERVERS( sp ) ;
 
          /*

@@ -71,7 +71,7 @@ static void cps_service_restart(void)
    const char *func = "cps_service_restart";
    int rs;
 
-   nowtime = time(NULL);
+   nowtime = _time(NULL);
    for( i=0; i < pset_count( SERVICES(ps) ); i++ ) {
       struct service *sp;
       struct service_config *scp;
@@ -119,7 +119,7 @@ void cps_service_stop(struct service *sp, const char *reason)
    msg(LOG_ERR, "service_stop", 
 	"Deactivating service %s due to %s.  Restarting in %d seconds.", 
 	SC_NAME(scp), reason, (int)SC_TIME_WAIT(scp));
-   nowtime = time(NULL);
+   nowtime = _time(NULL);
    SC_TIME_REENABLE(scp) = nowtime + SC_TIME_WAIT(scp);
    xtimer_add(cps_service_restart, SC_TIME_WAIT(scp));
 }
@@ -299,7 +299,7 @@ access_e parent_access_control( struct service *sp, const connection_s *cp )
    /* CPS handler */
    if( SC_TIME_CONN_MAX(scp) != 0 ) {
       int time_diff;
-      nowtime = time(NULL);
+      nowtime = _time(NULL);
       time_diff = nowtime - SC_TIME_LIMIT(scp) ;
 
       if( SC_TIME_CONN(scp) == 0 ) {

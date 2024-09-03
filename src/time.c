@@ -16,6 +16,7 @@
 #include "timex.h"
 #include "msg.h"
 #include "util.h"
+#include "xtimer.h"
 
 
 #define IN_RANGE( val, low, high )     ( (low) <= (val) && (val) <= (high) )
@@ -41,7 +42,7 @@ bool_int ti_current_time_check( const pset_h intervals )
    int16_t     min_current ;
    struct tm   *tmp ;
 
-   (void) time( &current_time ) ;
+   (void) _time( &current_time ) ;
    tmp = localtime( &current_time ) ;
    min_current = tmp->tm_hour * 60 + tmp->tm_min ;
 

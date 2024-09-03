@@ -43,6 +43,7 @@
 #include "logctl.h"
 #include "xconfig.h"
 #include "special.h"
+#include "xtimer.h"
 
 
 #define NEW_SVC()              NEW( struct service )
@@ -853,7 +854,7 @@ static status_e failed_service(struct service *sp,
 	       SVC_LAST_DGRAM_ADDR(sp) = (union xsockaddr *)last;
             }
 
-            (void) time( &current_time ) ;
+            (void) _time( &current_time ) ;
             if ( sinp->sin_addr.s_addr == last->sin_addr.s_addr &&
                                           sinp->sin_port == last->sin_port )
             {
@@ -880,7 +881,7 @@ static status_e failed_service(struct service *sp,
 	       SVC_LAST_DGRAM_ADDR( sp ) = (union xsockaddr *)last;
             }
 
-            (void) time( &current_time ) ;
+            (void) _time( &current_time ) ;
             if ( IN6_ARE_ADDR_EQUAL(&(sinp->sin6_addr), &(last->sin6_addr)) && 
                  sinp->sin6_port == last->sin6_port )
             {

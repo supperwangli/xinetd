@@ -36,6 +36,7 @@
 #include "nvlists.h"
 #include "child.h"
 #include "access.h"
+#include "xtimer.h"
 
 #define BUFFER_SIZE               1024
 
@@ -237,7 +238,7 @@ static void daytime_protocol( char *buf, unsigned int *buflen )
    int         size = *buflen ;
    int      cc ;
 
-   (void) time( &now ) ;
+   (void) _time( &now ) ;
    tmp = localtime( &now ) ;
    cc = strx_nprint( buf, size,
       "%02d %s %d %02d:%02d:%02d",
@@ -308,7 +309,7 @@ static void time_protocol( unsigned char *timep )
    time_t now ;
    unsigned long base1900;
 
-   (void) time( &now ) ;
+   (void) _time( &now ) ;
    base1900 = (unsigned long)now + TIME_OFFSET ;
    timep[0] = base1900 >> 24;
    timep[1] = base1900 >> 16;
